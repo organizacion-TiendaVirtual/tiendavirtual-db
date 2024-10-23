@@ -23,6 +23,7 @@ END//
 DELIMITER ;
 
 
+
 -- Mostrar Proveedores
 DELIMITER //
 CREATE PROCEDURE proSelectProveedor()
@@ -31,6 +32,14 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Selecciona unicamente el id y el nombre de los provedores
+DELIMITER //
+CREATE PROCEDURE spSelectProvidersDDL()
+BEGIN
+	select prov_id, concat(prov_nit,' - ',prov_nombre) AS nombre
+    from tbl_proveedores;
+END//
+DELIMITER ;
 
    -- Eliminar un Proveedor
 DELIMITER //
