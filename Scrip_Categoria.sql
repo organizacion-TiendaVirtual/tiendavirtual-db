@@ -25,6 +25,15 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Selecciona unicamente el id y el nombre de la categoria
+DELIMITER //
+CREATE PROCEDURE spSelectCategoryDDL()
+BEGIN
+	select cat_id,cat_nombre
+    from tbl_categoria;
+END//
+DELIMITER ;
+
 -- Eliminar______________________________
 DELIMITER //
 CREATE PROCEDURE proDeleteCategory(IN v_id INT)
