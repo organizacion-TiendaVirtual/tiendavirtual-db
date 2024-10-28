@@ -1,43 +1,71 @@
+-- TABLA PAGOS CRUD 
 
 
 -- INSERTAR PAGO
 DELIMITER //
-CREATE PROCEDURE proInsertPay(IN v_monto DOUBLE,IN v_metodo_pago VARCHAR(45),IN v_fecha TEXT,IN v_pedidos_id INT)
+CREATE PROCEDURE tienInsertPay(
+IN v_pag_monto DOUBLE,
+IN v_pag_fecha TEXT,
+IN v_pag_metodo_pago VARCHAR(45),
+IN v_tbl_pedidos_ped_id INT
+)
 BEGIN
-INSERT INTO tbl_pagos (pag_monto, pag_fecha, pag_met_pago, tbl_pedidos_ped_id)
-VALUES (v_monto, v_fecha, v_metodo_pago, v_pedidos_id);
+INSERT INTO tbl_pagos (pag_monto, pag_fecha, pag_metodo_pago, tbl_pedidos_ped_id)
+VALUES (v_pag_monto, v_pag_fecha, v_pag_metodo_pago, v_tbl_pedidos_ped_id);
 END //
 DELIMITER ;
 
 
 -- SELECT PAGO
 DELIMITER //
-CREATE PROCEDURE proSelectPay()
+CREATE PROCEDURE tienSelectPay()
 BEGIN
     SELECT * FROM tbl_pagos;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE tienSelectPayID (IN v_pag_id INT)
+BEGIN
+    SELECT * FROM tbl_pagos WHERE pag_id = v_pag_id;
 END //
 DELIMITER ;
 
 
 -- ACTUALIZAR PAGO 
 DELIMITER //
-CREATE PROCEDURE proUpdatePay(IN v_id INT,IN v_monto DOUBLE,IN v_metodo_pago VARCHAR(45),IN v_fecha TEXT,IN v_pedidos_id INT)
+CREATE PROCEDURE tienUpdatePay (
+IN v_pag_id INT,
+IN v_pag_monto DOUBLE,
+IN v_pag_fecha TEXT,
+IN v_pag_metodo_pago VARCHAR(45),
+IN v_tbl_pedidos_ped_id INT
+)
 BEGIN
 UPDATE tbl_pagos
-SET 
-pag_monto = v_monto,
-pag_met_pago = v_metodo_pago,
-pag_fecha = v_fecha,
-tbl_pedidos_ped_id = v_pedidos_id
-WHERE pag_id = v_id;
+SET pag_monto = v_pag_monto,
+pag_fecha = v_pag_fecha,
+pag_metodo_pago = v_pag_metodo_pago,
+tbl_pedidos_ped_id = v_tbl_pedidos_ped_id
+WHERE pag_id = v_pag_id;
+END //
+
+DELIMITER ;
+
+-- ELIMINAR PAGO
+DELIMITER //
+CREATE PROCEDURE tienDeletePay (IN v_pag_id INT)
+BEGIN
+    DELETE FROM tbl_pagos WHERE pag_id = v_pag_id;
 END //
 DELIMITER ;
 
 
--- ELIMINAR PAGO
+-- procedimiento DDL
 DELIMITER //
-CREATE PROCEDURE proDeletePay(IN v_id INT)
+CREATE PROCEDURE spSelectPagosDDL()
 BEGIN
-    DELETE FROM tbl_pagos WHERE pag_id = v_id;
+  SELECT pag_id, CONCAT('Pedido ', tbl_pedidos_ped_id, ', Monto: ', pag_monto, ', Fecha: ', pag_fecha, ', Método: ', pag_metodo_pago) AS DetallePago
+  FROM tbl_pagos;
 END //
 DELIMITER ;
