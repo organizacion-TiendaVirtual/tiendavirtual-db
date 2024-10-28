@@ -23,7 +23,7 @@ BEGIN
 END//
 DELIMITER ;
 
-   
+
     -- Mostrar Detalles de Pedido
 DELIMITER //
 CREATE PROCEDURE proSelectDetallePedido()
@@ -37,6 +37,16 @@ BEGIN
     FROM tbl_detalle_pedido;
 END//
 DELIMITER ;
+
+  -- Selecciona unicamente el id y el nombre de los detalles pedidos
+DELIMITER //
+CREATE PROCEDURE spSelectDetallePedidoDDL()
+BEGIN
+    SELECT det_id, CONCAT('Producto ID: ', tbl_productos_pro_id, ', Pedido ID: ', tbl_pedidos_ped_id) AS detalle
+    FROM tbl_detalle_pedido;
+END//
+DELIMITER ;
+
 
     -- Eliminar un Detalle de Pedido
 DELIMITER //
