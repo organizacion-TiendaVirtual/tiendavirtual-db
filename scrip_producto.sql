@@ -55,6 +55,7 @@ BEGIN
 END//
 DELIMITER ;
 
+
     -- eliminar peoducto
 DELIMITER //
 CREATE PROCEDURE proDeleteProducto(IN v_id INT)
