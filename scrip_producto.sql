@@ -46,6 +46,14 @@ BEGIN
 END//
 DELIMITER ;
 
+  -- Selecciona unicamente el id y el nombre de los productos
+DELIMITER //
+CREATE PROCEDURE spSelectProductoDDL()
+BEGIN
+    SELECT pro_id, CONCAT(pro_nombre, ' - ', pro_precio, ' - ', pro_stock) AS producto_info
+    FROM tbl_productos;
+END//
+DELIMITER ;
 
     -- eliminar peoducto
 DELIMITER //
