@@ -14,7 +14,8 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE proSelectClients()
 BEGIN
-    SELECT * FROM tbl_clientes;
+    SELECT cli_id, cli_nombre, cli_telefono, cli_direccion 
+    FROM tbl_cliente;
 END //
 DELIMITER ;
 
