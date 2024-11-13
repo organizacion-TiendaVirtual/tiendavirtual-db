@@ -3,7 +3,7 @@
 
 -- INSERTAR PAGO
 DELIMITER //
-CREATE PROCEDURE tienInsertPay(
+CREATE PROCEDURE proInsertPay(
 IN v_pag_monto DOUBLE,
 IN v_pag_fecha TEXT,
 IN v_pag_metodo_pago VARCHAR(45),
@@ -18,14 +18,14 @@ DELIMITER ;
 
 -- SELECT PAGO
 DELIMITER //
-CREATE PROCEDURE tienSelectPay()
+CREATE PROCEDURE proSelectPay()
 BEGIN
     SELECT * FROM tbl_pagos;
 END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE tienSelectPayID (IN v_pag_id INT)
+CREATE PROCEDURE proSelectPayID (IN v_pag_id INT)
 BEGIN
     SELECT * FROM tbl_pagos WHERE pag_id = v_pag_id;
 END //
@@ -34,7 +34,7 @@ DELIMITER ;
 
 -- ACTUALIZAR PAGO 
 DELIMITER //
-CREATE PROCEDURE tienUpdatePay (
+CREATE PROCEDURE proUpdatePay (
 IN v_pag_id INT,
 IN v_pag_monto DOUBLE,
 IN v_pag_fecha TEXT,
@@ -54,7 +54,7 @@ DELIMITER ;
 
 -- ELIMINAR PAGO
 DELIMITER //
-CREATE PROCEDURE tienDeletePay (IN v_pag_id INT)
+CREATE PROCEDURE proDeletePay (IN v_pag_id INT)
 BEGIN
     DELETE FROM tbl_pagos WHERE pag_id = v_pag_id;
 END //
