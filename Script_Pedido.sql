@@ -2,30 +2,37 @@
 
 -- Insertar pedido
 DELIMITER //
-CREATE PROCEDURE tienInsertOrder(
+CREATE PROCEDURE proInsertOrder(
 IN v_ped_fecha VARCHAR(45),
 IN v_ped_estado VARCHAR(45),
 IN v_ped_total INT,
-IN v_tbl_cliente_clien_id INT
+IN v_tbl_cliente_cli_id INT
 )
 BEGIN
-INSERT INTO tbl_pedidos (ped_fecha, ped_estado, ped_total, tbl_cliente_clien_id)
-VALUES (v_ped_fecha, v_ped_estado, v_ped_total, v_tbl_cliente_clien_id);
+INSERT INTO tbl_pedidos (ped_fecha, ped_estado, ped_total, tbl_cliente_cli_id)
+VALUES (v_ped_fecha, v_ped_estado, v_ped_total, v_tbl_cliente_cli_id);
 END //
 DELIMITER ;
 
 
 -- SELECT PEDIDO
 DELIMITER //
-CREATE PROCEDURE tienSelectOrder()
+CREATE PROCEDURE proSelectOrder()
 BEGIN
-    SELECT * FROM tbl_pedidos;
+     SELECT 
+    p.ped_id, 
+        p.ped_fecha, 
+        p.ped_estado, 
+        p.ped_total, 
+        c.cli_nombre AS cliente
+    FROM tbl_pedidos p
+    INNER JOIN tbl_cliente c ON p.tbl_cliente_cli_id = c.cli_id;
 END //
 DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE tienSelectOrderID (IN v_ped_id INT)
+CREATE PROCEDURE proSelectOrderID (IN v_ped_id INT)
 BEGIN
     SELECT * FROM tbl_pedidos WHERE ped_id = v_ped_id;
 END //
@@ -35,26 +42,26 @@ DELIMITER ;
 
 -- ACTUALIZAR PEDIDO
 DELIMITER //
-CREATE PROCEDURE tienUpdateOrder(
+CREATE PROCEDURE proUpdateOrder(
 IN v_ped_id INT,
 IN v_ped_fecha VARCHAR(30),
 IN v_ped_estado VARCHAR(45),
 IN v_ped_total DECIMAL (10,2),
-IN v_tbl_cliente_clien_id INT
+IN v_tbl_cliente_cli_id INT
 )
 BEGIN
 UPDATE tbl_pedidos
 SET ped_fecha = v_ped_fecha,
 ped_estado = v_ped_estado,
 ped_total = v_ped_total,
-tbl_cliente_clien_id = v_tbl_cliente_clien_id
+tbl_cliente_cli_id = v_tbl_cliente_cli_id
 WHERE ped_id = v_ped_id;
 END //
 DELIMITER ;
 
 -- ELIMINAR PEDIDO 
 DELIMITER //
-CREATE PROCEDURE tienDeleteOrder (IN v_ped_id INT)
+CREATE PROCEDURE proDeleteOrder (IN v_ped_id INT)
 BEGIN
     DELETE FROM tbl_pedidos WHERE ped_id = v_ped_id;
 END //
@@ -64,7 +71,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE spSelectPedidosDDL()
 BEGIN
-  SELECT ped_id, CONCAT('Cliente ', tbl_cliente_clien_id, ', Fecha: ', ped_fecha, ', Estado: ', ped_estado, ', Total: ', ped_total) AS DetallePedido
+  SELECT ped_id, CONCAT('Cliente ', tbl_cliente_cli_id, ', Fecha: ', ped_fecha, ', Estado: ', ped_estado, ', Total: ', ped_total) AS DetallePedido
   FROM tbl_pedidos;
 END //
 DELIMITER ;
