@@ -6,11 +6,11 @@ CREATE PROCEDURE proInsertOrder(
 IN v_ped_fecha VARCHAR(45),
 IN v_ped_estado VARCHAR(45),
 IN v_ped_total INT,
-IN v_tbl_cliente_cli_id INT
+IN v_tbl_clientes_cli_id INT
 )
 BEGIN
-INSERT INTO tbl_pedidos (ped_fecha, ped_estado, ped_total, tbl_cliente_cli_id)
-VALUES (v_ped_fecha, v_ped_estado, v_ped_total, v_tbl_cliente_cli_id);
+INSERT INTO tbl_pedidos (ped_fecha, ped_estado, ped_total, tbl_clientes_cli_id)
+VALUES (v_ped_fecha, v_ped_estado, v_ped_total, v_tbl_clientes_cli_id);
 END //
 DELIMITER ;
 
@@ -26,7 +26,7 @@ BEGIN
         p.ped_total, 
         c.cli_nombre AS cliente
     FROM tbl_pedidos p
-    INNER JOIN tbl_cliente c ON p.tbl_cliente_cli_id = c.cli_id;
+    INNER JOIN tbl_clientes c ON p.tbl_clientes_cli_id = c.cli_id;
 END //
 DELIMITER ;
 
@@ -47,14 +47,14 @@ IN v_ped_id INT,
 IN v_ped_fecha VARCHAR(30),
 IN v_ped_estado VARCHAR(45),
 IN v_ped_total DECIMAL (10,2),
-IN v_tbl_cliente_cli_id INT
+IN v_tbl_clientes_cli_id INT
 )
 BEGIN
 UPDATE tbl_pedidos
 SET ped_fecha = v_ped_fecha,
 ped_estado = v_ped_estado,
 ped_total = v_ped_total,
-tbl_cliente_cli_id = v_tbl_cliente_cli_id
+tbl_clientes_cli_id = v_tbl_clientes_cli_id
 WHERE ped_id = v_ped_id;
 END //
 DELIMITER ;
@@ -71,7 +71,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE spSelectPedidosDDL()
 BEGIN
-  SELECT ped_id, CONCAT('Cliente ', tbl_cliente_cli_id, ', Fecha: ', ped_fecha, ', Estado: ', ped_estado, ', Total: ', ped_total) AS DetallePedido
+  SELECT ped_id, CONCAT('Cliente ', tbl_clientes_cli_id, ', Estado: ', ped_estado ) AS DetallePedido
   FROM tbl_pedidos;
 END //
 DELIMITER ;
