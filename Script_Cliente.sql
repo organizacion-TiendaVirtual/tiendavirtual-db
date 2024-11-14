@@ -15,7 +15,7 @@ DELIMITER //
 CREATE PROCEDURE proSelectClients()
 BEGIN
     SELECT cli_id, cli_nombre, cli_telefono, cli_direccion 
-    FROM tbl_cliente;
+    FROM tbl_clientes;
 END //
 DELIMITER ;
 
@@ -26,7 +26,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE proUpdateClient(IN v_id INT,IN v_nombre VARCHAR(45),IN v_telefono VARCHAR(15),IN v_direccion TEXT)
 BEGIN
-    UPDATE tbl_cliente 
+    UPDATE tbl_clientes 
     SET cli_nombre = v_nombre, 
         cli_telefono = v_telefono, 
         cli_direccion = v_direccion
