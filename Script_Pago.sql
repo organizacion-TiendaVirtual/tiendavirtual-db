@@ -65,7 +65,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE spSelectPagosDDL()
 BEGIN
-  SELECT pag_id, CONCAT('Pedido ', tbl_pedidos_ped_id, ', Monto: ', pag_monto, ', Fecha: ', pag_fecha, ', Método: ', pag_metodo_pago) AS DetallePago
+  SELECT pag_id, CONCAT('Pedido ', tbl_pedidos_ped_id, ', Monto: ', pag_monto) AS DetallePago
   FROM tbl_pagos;
 END //
 DELIMITER ;
