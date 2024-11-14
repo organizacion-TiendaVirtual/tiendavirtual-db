@@ -26,8 +26,10 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE proUpdateClient(IN v_id INT,IN v_nombre VARCHAR(45),IN v_telefono VARCHAR(15),IN v_direccion TEXT)
 BEGIN
-    UPDATE tbl_clientes
-    SET cli_nombre = v_nombre,cli_telefono = v_telefono,cli_direccion = v_direccion
+    UPDATE tbl_cliente 
+    SET cli_nombre = v_nombre, 
+        cli_telefono = v_telefono, 
+        cli_direccion = v_direccion
     WHERE cli_id = v_id;
 END //
 DELIMITER ;
