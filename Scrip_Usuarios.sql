@@ -34,3 +34,14 @@ BEGIN
 	DELETE FROM tbl_usuarios WHERE usu_id = v_id;
 END//
 DELIMITER ;
+
+
+-- Selecciona un usuario por su correo 
+DELIMITER  //
+CREATE PROCEDURE spSelectUsersMail(IN p_mail VARCHAR (80))
+BEGIN 
+select usu_correo, usu_contrasena, usu_salt, usu_estado, usu_rol
+from tbl_usuarios
+where usu_correo = p_mail;
+END//
+DELIMITER ;
